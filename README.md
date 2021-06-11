@@ -17,8 +17,8 @@ Unet에 대한 자세한 내용은 [논문](https://arxiv.org/pdf/1505.04597.pdf
 
 ## 아나콘다 설치
 
-[설치 가이드](https://docs.anaconda.com/anaconda/install/linux/)
-[파일 경로](https://repo.anaconda.com/archive/)
+- [설치 가이드](https://docs.anaconda.com/anaconda/install/linux/)
+- [Archive 파일 url](https://repo.anaconda.com/archive/)
 ```bash
     wget https://repo.anaconda.com/archive/Anaconda3-5.3.1-Linux-x86_64.sh -O ~/Anaconda3-5.3.1-Linux-x86_64.sh
     bash ~/Anaconda3-5.3.1-Linux-x86_64.sh
