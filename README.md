@@ -1,14 +1,9 @@
 # tensorflow
 Tensorflow and Keras 학습 저장소
 ```txt
-Keras API를 기반의 딥러닝 모델 네트워크를 정의하고 학습 및 테스트를 목표할 때 필요한 내용을 포함하며,
-Unet 논문을 바탕으로 네트워크를 정의하는 것을 목표로 설정하여 코드를 작성했습니다.
+Keras API를 기반의 딥러닝 모델 네트워크를 정의하고 학습 및 테스트를 목표할 때 필요한 내용을 작성했습니다.
 ```
 
-<img src="https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/u-net-architecture.png" width="70%">
-
-Unet에 대한 자세한 내용은 [논문](https://arxiv.org/pdf/1505.04597.pdf) 을 참조하면 됩니다.
-***
 
 ## 코드 실행 환경
 
@@ -35,13 +30,22 @@ Unet에 대한 자세한 내용은 [논문](https://arxiv.org/pdf/1505.04597.pdf
 
 ```bash
     # OpenCV
-    pip install tensorflow==1.15.0
+    pip install tensorflow
     # Pillow
-    pip install pillow
+    pip install Pillow
     # Matplotlib
     pip install matplotlib
 ```
 
 ## 스크립트에서 확인할 수 있는 함수들
 
-
+1. 01-tensorflow_base.py
+    - check_tensor_contant() : 텐서 상수
+    - check_random_tensor() : 랜덤 텐서
+    - check_eager_execution() : 즉시실행 모드
+    - check_tensor_and_numpy() : Numpy 호환성
+    - check_slicing_tensor() : 텐서 슬라이싱
+    - check_tensor_function() : 텐서 지원 기본 함수
+    - check_function_with_tf_function_annot() : @tf.function + 함수
+    - check_model_with_tf_function_annot() : @tf.function + 클래스
+    - check_graph_gradient() : gradient(미분) 값 계산
