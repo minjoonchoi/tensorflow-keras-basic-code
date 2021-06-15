@@ -3,8 +3,8 @@ import numpy as np
 import tensorflow as tf
 import timeit
 from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Flatten, Dense, Dropout
-
+from tensorflow.keras.layers import Input, Dense, Flatten, Activation, Concatenate, Dropout
+from tensorflow.keras.models import Sequential
 # Eager execution
 if tf.__version__ < "2":
     tf.enable_eager_execution()
@@ -112,32 +112,17 @@ def check_function_with_tf_function_annot():
     print('함수 Graph time ', timeit.timeit(lambda: fun(inputs), number=10000))
 
 
-def check_model_with_tf_function_annot():
-    """tf.function annotation 적용 유무에 따른 Subclassing 모델 학습 시간 비교
+def check_model_with_tf_function():
+    """tf.function 적용 유무에 따른 Keras 모델 학습 시간 비교
     """
-    class SubclassModel(Model):
-        """Subclassing 케라스 모델 클래스
-
-        Args:
-            Model (tensorflow.keras.models.Model): 케라스 모델 클래스
-        """
-        def __init__(self, *args, **kwargs):
-            super(SubclassModel, self).__init__(*args, **kwargs)
-            self.flatten = Flatten(input_shape=(28,28))
-            self.dense_1 = Dense(256, activation='relu')
-            self.dropout = Dropout(0.5)
-            self.dense_2 = Dense(10)
-
-        def call(self, x):
-            x = self.flatten(x)
-            x = self.dense_1(x)
-            x = self.dropout(x)
-            x = self.dense_2(x)
-            return x
-
     inputs = tf.random.normal((120, 28, 28))
 
-    eager_model = SubclassModel()
+    eager_model = Sequential()
+    eager_model.add(Input(shape=(28,28)))
+    eager_model.add(Dense(units=50, activation='relu'))
+    eager_model.add(Dense(units=100, activation='relu'))
+    eager_model.add(Dense(units=10, activation='softmax'))
+
     graph_model = tf.function(eager_model)
 
     print('클래스 Eager time ', timeit.timeit(lambda: eager_model(inputs), number=10000))
@@ -181,9 +166,9 @@ def main():
     # 텐서 지원 함수 
     check_tensor_function()
 
-    # tf.function 어노테이션
+    # tf.function
     check_function_with_tf_function_annot()
-    check_model_with_tf_function_annot()
+    check_model_with_tf_function()
 
     # gradient(미분) 값
     check_graph_gradient()
