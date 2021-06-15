@@ -55,3 +55,6 @@ Keras API를 기반의 딥러닝 모델 네트워크를 정의하고 학습 및 
 
 1. 01-tensorflow_linear_regression.py
     - Linear regression 모델를 optimizer(Adam)의 apply_gradients() 와 minimize()함수를 각각 사용해서 학습하는 코드
+    
+2. 02-tensorflow_logistic_regression.py
+    - MNIST 데이터를 tf.data.Dataset으로 전처리하여 Logisitic regression 모델을 학습하는 코드
