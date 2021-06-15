@@ -37,7 +37,7 @@ Keras API를 기반의 딥러닝 모델 네트워크를 정의하고 학습 및 
     pip install matplotlib
 ```
 
-## 스크립트에서 확인할 수 있는 함수들
+## 함수 예제 스크립트
 
 1. 01-tensorflow_base.py
     - check_tensor_contant() : 텐서 상수
@@ -51,7 +51,7 @@ Keras API를 기반의 딥러닝 모델 네트워크를 정의하고 학습 및 
     - check_graph_gradient() : gradient(미분) 값 계산
 
 
-## 모델 구현 코드 (implementation)
+## 모델 예제 스크립트 (implementation)
 
 1. 01-tensorflow_linear_regression.py
     - Linear regression 모델를 optimizer(Adam)의 apply_gradients() 와 minimize()함수를 각각 사용해서 학습하는 코드
