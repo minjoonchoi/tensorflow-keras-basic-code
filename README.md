@@ -51,7 +51,7 @@ Keras API를 기반의 딥러닝 모델 네트워크를 정의하고 학습 및 
     - check_graph_gradient() : gradient(미분) 값 계산
 
 
-## 모델 구현 코드
+## 모델 구현 코드 (implementation)
 
 1. 01-tensorflow_linear_regression.py
     - Linear regression 모델를 optimizer(Adam)의 apply_gradients() 와 minimize()함수를 각각 사용해서 학습하는 코드
