@@ -1,13 +1,13 @@
+import sys
+import argparse
+
 import tensorflow as tf
 from tensorflow.keras.layers import Input, Dense, Flatten, Activation, Concatenate, Dropout
 from tensorflow.keras.models import Sequential
 from tensorflow.keras import Model
 from tensorflow.keras.utils import plot_model
 
-def check_sequential_model():
-    """Sequential API 모델 예제로 
-    다중 입/출력 모델은 불가능
-    """
+def sequential_model():
     model = Sequential()
     model.add(Input(shape=(28,28)))
     model.add(Dense(units=50, activation='relu'))
@@ -22,10 +22,7 @@ def check_sequential_model():
 
     return model
 
-def check_functional_model():
-    """Functional API 모델 예제로 
-    다중 입/출력이 가능해 네트워크 구성시 가장 권장되는 방법
-    """
+def functional_model():
     inputs = Input(shape=(28, 28, 1))
     x = Flatten(input_shape=(28, 28, 1))(inputs)
     x = Dense(units=50, activation='relu')(x)
@@ -41,9 +38,7 @@ def check_functional_model():
 
     return model
 
-def check_multiple_input_model():
-    """다중 입/출력을 사용하는 Functional API 모델
-    """
+def multiple_input_model():
     input_1 = Input(shape=(10,3))
     hidden_1 = Dense(units=50, activation='relu')(input_1)
     hidden_2 = Dense(units=100, activation='relu')(hidden_1)
@@ -64,15 +59,33 @@ def check_multiple_input_model():
     return model
 
 
-def main():
-    # Sequential API 사용 네트워크
-    check_sequential_model()
+#----------------------------------------------------------------------------
 
-    # Functional API 사용 네트워크
-    check_functional_model()
+def execute_cmdline(argv):
+    prog = argv[0]
+    parser = argparse.ArgumentParser(
+        prog        = prog,
+        description = 'Tensorflow-Keras 모델 예제 코드',
+        epilog      = 'Type "%s <command> -h" for more information.' % prog)
 
-    # Functional API + 다중 입력
-    check_multiple_input_model()
+    subparsers = parser.add_subparsers(dest='command')
+    subparsers.required = True
+    def add_command(cmd, desc, example=None):
+        epilog = 'Example: %s %s' % (prog, example) if example is not None else None
+        return subparsers.add_parser(cmd, description=desc, help=desc, epilog=epilog)
+
+    p = add_command(cmd='sequential_model', desc='Sequential API 모델 예제 : 다중 입/출력 불가')
     
-if __name__=='__main__':
-    main()
+    p = add_command(cmd='functional_model',  desc='Functional API 모델 예제 (Recommended)')
+    
+    p = add_command(cmd='multiple_input_model',  desc='다중 입/출력을 사용하는 Functional API 모델 예제')
+    
+    args = parser.parse_args(argv[1:] if len(argv) > 1 else ['-h'])
+    func = globals()[args.command]
+    del args.command
+    func(**vars(args))
+
+#----------------------------------------------------------------------------
+
+if __name__ == "__main__":
+    execute_cmdline(sys.argv)
