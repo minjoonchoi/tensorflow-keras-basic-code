@@ -45,23 +45,69 @@ Keras API를 기반의 딥러닝 모델 네트워크를 정의하고 학습 및 
     sudo apt install graphviz
 ```
 
-## 함수 예제 스크립트
+## 예제 스크립트
 
 1. 01-tensorflow_base.py
-    - check_tensor_contant() : 텐서 상수
-    - check_random_tensor() : 랜덤 텐서
-    - check_eager_execution() : 즉시실행 모드
-    - check_tensor_and_numpy() : Numpy 호환성
-    - check_slicing_tensor() : 텐서 슬라이싱
-    - check_tensor_function() : 텐서 지원 기본 함수
-    - check_function_with_tf_function_annot() : @tf.function + 함수
-    - check_model_with_tf_function() : tf.function + Keras 모델
-    - check_graph_gradient() : gradient(미분) 값 계산
+
+```txt
+    usage: 01-tensorflow_base.py [-h]
+                             {tensor_contant,random_tensor,eager_execution,tensor_and_numpy,slicing_tensor,tensor_function,function_with_tf_function_annot,model_with_tf_function,graph_gradient}
+                             ...
+
+    Tensorflow 기본 예제 코드
+
+    positional arguments:
+    {tensor_contant,random_tensor,eager_execution,tensor_and_numpy,slicing_tensor,tensor_function,function_with_tf_function_annot,model_with_tf_function,graph_gradient}
+        tensor_contant      tf.constant Tensor
+        random_tensor       tf.random Tensor
+        eager_execution     Eager execution : 세션을 초기화 없이 그래프를 즉시 실행
+        tensor_and_numpy    Tensor와 Numpy 배열 호환성
+        slicing_tensor      Tensor 슬라이싱
+        tensor_function     Tensor 지원 함수 예제
+        function_with_tf_function_annot
+                            tf.function 유무에 따른 함수 수행시간 비교
+        model_with_tf_function
+                            tf.function 유무에 따른 Keras 모델 학습 시간 비교
+        graph_gradient      미분 연산
+
+    optional arguments:
+    -h, --help            show this help message and exit
+```
 
 2. 02-keras_base.py
-    - check_sequential_model() : Sequential API 기반 네트워크
-    - check_functional_model() : Functional API 기반 네트워크
-    - check_multiple_input_model() : Functional API + 다중 입력 네트워크
+
+```
+    usage: 02-keras_base.py [-h] {sequential_model,functional_model,multiple_input_model} ...
+
+    Tensorflow-Keras 예제 코드
+
+    positional arguments:
+    {sequential_model,functional_model,multiple_input_model}
+        sequential_model    Sequential API 모델 예제 : 다중 입/출력 불가
+        functional_model    Functional API 모델 예제 (Recommended)
+        multiple_input_model
+                            다중 입/출력을 사용하는 Functional API 모델 예제
+
+    optional arguments:
+    -h, --help            show this help message and exit
+```
+3. 03-tfrecord.py
+
+```txt
+    usage: .\tfrecord.py [-h] {convert,tf_example,tf_record,tf_record_with_img} ...
+
+    Tool for converting raw data to TF Record.
+
+    positional arguments:
+    {convert,tf_example,tf_record,tf_record_with_img}
+        convert             각 타입 별 value를 tf.train.Feature 클래스 변수로 변환
+        tf_example          각 타입 별 value를 tf.train.Example message를 생성
+        tf_record           Numpy array들을 기반으로 tf.train.Example을 생성하고, TFRecord 파일에 저장한 뒤 결과 확인
+        tf_record_with_img  Image 파일을 기반으로 tf.train.Example을 생성하고, TFRecord 파일에 저장한 뒤 결과 확인
+
+    optional arguments:
+    -h, --help            show this help message and exit
+```
 
 ## 모델 예제 스크립트 (model)
 
